@@ -147,8 +147,59 @@ doc/**/*.pdf
 - `git diff --staged` --> Compares your staged changes to your last commit.
   - Or `git diff --cached`
 
-### `git commit`
+### `git commit` and other useful cmds
 
 - `git commit -v` to put diffs of files in as part of the commit msg.
-- `-m` for inline msg.
-- `-a` to skip the staging area and makes Git stage every file that is already tracked before doing the the commit, skipping `git add`.
+  - `-m` for inline msg.
+  - `-a` to skip the staging area and makes Git stage every file that is already tracked before doing the the commit, skipping `git add`.
+  - `--amend` to change last commit msg if nothing is staged. Otherwise the commit itself changes.
+- `git rm <file>` to remove a file from Git. `-f` for force removal if the file has been staged.
+  - `--cached` to simply remove the file from the staging area but keep the file in the working tree. USeful if you forgot to add a pattern in `.gitignore`.
+  - Glob patterns can be passed to this cmd. A thing to note: escape sequence in Git needs to be used inline e.g., `git rm log/\*.log` for `*`.
+- `git mv file1 file2` to rename a file in Git. The changes will be shown if the file is not staged.
+
+<br>
+
+## Viewing the Commit History
+
+- `git log` lists the commits made in reverse chronological order.
+  - `-p` or `--patch` shows diff introduces in each commit. 
+  - `-<num>` to limit the number of commits displayed.
+  - `--since=2.weeks` gets the list of commits made in the last 2 weeks.
+  - `--author`
+  - `--grep` to search for key words in commit msg.
+  - `--stat` pr `--shortstat` to see summary.
+  - `--graph` to see branch and merge history.
+  - `--relative-date`
+  - `--name-only` --> show the list of files modified after the commit info.
+  - `--name-status` --> show the list of files affected with added/modified/deleted info too.
+  - `--pretty=[oneline | short | full | fuller]`
+  - `--pretty=format:"%h - %an, %ar : %s"` allows me to specify my own log output format - useful when I'm generating output for machine parsing.
+    - `%[H|T|P]` - commit hash / tree hash / parent hash
+    - `%[h|t|p]` - abbreviated commit hash / tree hash / parent hash
+    - `%[an|ae|ad|ar]` - author (person who originally wrote the work) name / email / date / relative date
+    - `%[cn|ce|cd|cr]` - committer (person who last applied the work) name/email/date/relative date
+    - `%s` - subject
+  - `-- path/to/file` to limit the log output to commits that introduced a change to those files.
+  - `--no-merges` to preventing the display of merge commits.
+
+<br>
+
+## Undoing Things
+
+- Only amend commits that are still local and have not been pushed somewhere.
+- `git commit --amend`
+- To unstage a file: `git reset HEAD <file>` or `git restore --staged <file>`
+- To unmodify a modified file: `git checkout -- <file>` (dangerous) or `git restore <file>` (dangerous)
+- Anything you lose that was never committed is likely never to be seen again.
+
+<br>
+
+## Working with Remotes
+
+- `git remote` to see which remote servers I have configured. If I cloned my repo I should at least see `origin`.
+  - `-v` to show me the URLs.
+  - If I have >1 remote, it would be listed. It means that we can pull contributions from any users listed and potentially push to one/more of these.
+- `git remote add <shortname> <url>` --> once added you can `git fetch <shortname>`.
+- `git fetch <remote>` only downloads the data to local but does not automatically merge it with any of my work.
+- `git pull <remote>`
