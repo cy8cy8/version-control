@@ -200,6 +200,32 @@ doc/**/*.pdf
 - `git remote` to see which remote servers I have configured. If I cloned my repo I should at least see `origin`.
   - `-v` to show me the URLs.
   - If I have >1 remote, it would be listed. It means that we can pull contributions from any users listed and potentially push to one/more of these.
+  - `show <remote>` to see more info about a particular remote.
+  - `rename <original> <updated>` to rename remotes.
+  - `remove <remote>` to remove a remote.
 - `git remote add <shortname> <url>` --> once added you can `git fetch <shortname>`.
 - `git fetch <remote>` only downloads the data to local but does not automatically merge it with any of my work.
 - `git pull <remote>`
+- `git push <remote> <branch>`
+  - If someone else and I clone at the same time and they push upstream and then you push upstream, my push would be rejected. I will have to fetch their work first and incorporate it into mine before I am allowed to push.
+
+<br>
+
+## Tagging
+
+- Git has the ability to tag specific points in a repo's history as being important.
+- Typically people use tags to mark release points and so on.
+- `git tag [-l|--list]` to list tags.
+  - Listing tag wildcards requires `-l` and `--list` option.
+
+### Lightweight tags
+
+- Like a branch that doesn't change - just a pointer to a specific commit.
+
+### Annotated tags
+
+- Recommended.
+- Stored as full objects in the Git DB.
+- Checksummed, with tagger name, email, date and a tagging message.
+- `git tag -a <tagname> -m <msg>`
+- `git show` to see tag data with the commit that was tagged.
