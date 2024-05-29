@@ -146,4 +146,9 @@ doc/**/*.pdf
 - `git diff` --> What have you changed but not yet staged? If you've staged all of your changes, this won't return an output.
 - `git diff --staged` --> Compares your staged changes to your last commit.
   - Or `git diff --cached`
-- 
+
+### `git commit`
+
+- `git commit -v` to put diffs of files in as part of the commit msg.
+- `-m` for inline msg.
+- `-a` to skip the staging area and makes Git stage every file that is already tracked before doing the the commit, skipping `git add`.
