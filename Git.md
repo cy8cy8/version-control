@@ -217,10 +217,13 @@ doc/**/*.pdf
 - Typically people use tags to mark release points and so on.
 - `git tag [-l|--list]` to list tags.
   - Listing tag wildcards requires `-l` and `--list` option.
+- By default, we have to explicitly push tags to a shared server after we have created them: `git push origin <tagname>`
 
 ### Lightweight tags
 
 - Like a branch that doesn't change - just a pointer to a specific commit.
+- The commit checksum stored in a file with no other info being kept.
+- `git tag <tag-name>`
 
 ### Annotated tags
 
@@ -228,4 +231,5 @@ doc/**/*.pdf
 - Stored as full objects in the Git DB.
 - Checksummed, with tagger name, email, date and a tagging message.
 - `git tag -a <tagname> -m <msg>`
+- `git tag -a <tag-name> <commit-checksum> -m <msg>` to tag previous commits.
 - `git show` to see tag data with the commit that was tagged.
