@@ -255,7 +255,7 @@ doc/**/*.pdf
 
 <br>
 
-## GIT BRANCHING 
+## GIT BRANCHING + MERGING
 
 ### Background
 
@@ -275,6 +275,18 @@ doc/**/*.pdf
 - `git branch <new-branch>`
   - Creates a new pointer.
   - `git log --oneline --decorate` to show where the branch pointers are pointing.
+  - `git log` doesn't show all the branches all the time so use `git log --all`.
 
 ![HEAD pointing to a branch](./Images/HEAD-pointer-to-a-branch.png)
 
+### Switching branches
+
+- `git checkout <branch>` or `git checkout -b <newbranchname>` to create and switch immediately.
+- `git log --oneline --decorate --graph --all` to see divergent history.
+- `git switch <branch>` or `git switch -c <newbranchname>` (`--create`) to create and switch immediately.
+- `git switch -` to return to your previously checked out branch.
+- Best to have a clean working state when you switch branches (you can use stashing and commit amending to get around it).
+
+### Merging
+
+- Fast-forward --> moving the pointer forward.
