@@ -290,3 +290,12 @@ doc/**/*.pdf
 ### Merging
 
 - Fast-forward --> moving the pointer forward.
+- `git merge <branch-to-merge-with>`
+  - If your branch `feature` is ahead of `main`, `git merge main` while on `feature` will fast-forward `main` to `feature`.
+- `git branch -d <branch>` to delete a branch.
+
+![3 snapshots used in a typical merge](./Images/three-snapshots-used-in-merge.png)
+
+![a merge commit](./Images/merge-commit.png)
+
+- A merge commit has more than 1 parent.
