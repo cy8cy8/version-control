@@ -221,7 +221,8 @@ doc/**/*.pdf
   - `git push <remote> --follow-tags` to push only annotated tags.
 - `git tag -d <tagname>` to delete a tag from local.
 - `git push origin --delete <tagname>` or `git push origin :refs/tags/<tagname>` to delete a tag from a remote server.
-- 
+- `git checkout <tagname>` to check out to a specific commit/tag (rather than a branch) and switch to a detached HEAD state. Check out to `main` or whatever branch you were at before to come back.
+  - If you commit while in detached HEAD state, the new commit won't belong to any branch except by the exact commit hash. To persist the change you have make a new branch.
 
 ### Lightweight tags
 
@@ -237,3 +238,43 @@ doc/**/*.pdf
 - `git tag -a <tagname> -m <msg>`
 - `git tag -a <tag-name> <commit-checksum> -m <msg>` to tag previous commits.
 - `git show` to see tag data with the commit that was tagged.
+
+<br>
+
+## Git Aliases
+
+- `git config --global alias.<alias> '<command>'`
+- Some examples to get started with:
+  - `git config --global alias.co checkout`
+  - `git config --global alias.br branch`
+  - `git config --global alias.ci commit`
+  - `git config --global alias.st status`
+- Useful for creating complex commands:
+  - `git config --global alias.last 'log -1 HEAD'` to see the last commit.
+- Optional: run an external command using alias --> `git config --global alias.<alias> '!<cmd>'`
+
+<br>
+
+## GIT BRANCHING 
+
+### Background
+
+**When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.**
+
+1. Staging the file computes a checksum, stores the blobs (the version of the file in the Git repo) and adds the checksum to the staging area.
+2. When committing, Git checksums each subdirectory and stores them as a tree object in the Git repo. Git then creates a common object that has the metadata and a pointer to the root object tree so it can create that snapshot when needed.
+3. Now the Git repo has several objects: blobs, 1 tree that lists the contents of the directory and specifies which file names are stored as which blobs, and 1 or multiple commits with the pointer to the root tree and all the commit metadata. 
+4. If you make some changes and commit again, the next commit stores a pointer to the commit that came immediately before it. The pointer simply moves forward with each commit.
+
+![A branch and its commit history](./Images/branch-and-commit-history.png)
+
+**A branch in Git --> a lightweight movable pointer to 1 of these commits.**
+
+### Create a new branch
+
+- `git branch <new-branch>`
+  - Creates a new pointer.
+  - `git log --oneline --decorate` to show where the branch pointers are pointing.
+
+![HEAD pointing to a branch](./Images/HEAD-pointer-to-a-branch.png)
+
