@@ -217,7 +217,11 @@ doc/**/*.pdf
 - Typically people use tags to mark release points and so on.
 - `git tag [-l|--list]` to list tags.
   - Listing tag wildcards requires `-l` and `--list` option.
-- By default, we have to explicitly push tags to a shared server after we have created them: `git push origin <tagname>`
+- By default, we have to explicitly push tags to a shared server after we have created them: `git push origin <tagname>` or `git push origin --tags` to push just all tags (will push both lightweight and annotated tags).
+  - `git push <remote> --follow-tags` to push only annotated tags.
+- `git tag -d <tagname>` to delete a tag from local.
+- `git push origin --delete <tagname>` or `git push origin :refs/tags/<tagname>` to delete a tag from a remote server.
+- 
 
 ### Lightweight tags
 
