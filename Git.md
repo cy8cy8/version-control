@@ -299,3 +299,21 @@ doc/**/*.pdf
 ![a merge commit](./Images/merge-commit.png)
 
 - A merge commit has more than 1 parent.
+- When receiving a merge conflict, run `git status` to see which files are unmerged.
+- After you’ve resolved each of these sections in each conflicted file, run `git add` on each file to mark it as resolved. Staging the file marks it as resolved in Git.
+
+### Branch Management + Workflows
+
+- `git branch` to see a list of branches.
+  - `-v` to see the last commit on each branch.
+  - `--merged <branch-name-optional>` or `--no-merged <branch-name-optional>` to see which branches are already merged into the branch I am on/provided branch name.
+  - `--move <previous-name> <current-name>` to change the branch name locally.
+  - `git push --set-upstream origin <updated-name>` to let others see the corrected branch on the remote.
+- Example workflow: 
+  - `main` branch with code that is entirely stable/has been/will be released to production.
+  - `dev` branch that we work from or use to test stability - not necessarily stable.
+    - Topic branches such as a specific feature branch is created on top of `dev`.
+    - Some projects have `proposed` or `pu` (proposed update) branch that has integrated branches that may not be ready to go into `dev` or `main`.
+  - `test` branch for testing/QA.
+- The idea is that your branches are at various levels of stability; when they reach a more stable level, they’re merged into the branch above them.
+  - 
